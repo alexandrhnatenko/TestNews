@@ -41,7 +41,17 @@ class PostListApiView(generics.ListCreateAPIView):
 
 class PostApiView(generics.RetrieveUpdateDestroyAPIView):
     """
+    API to get, update or delete concrete post
+    GET: /posts/<post_id>/ - return information about post
 
+    PUT, PATCH: /posts/<post_id>/ - update post
+    Body params
+            "title" -> string
+            "link" -> string
+            "author_name" -> string
+            "votes" -> integer
+
+    DELETE: /posts/<post_id>/ - delete post
     """
     serializer_class = PostSerializer
     queryset = Post.objects.all()
@@ -76,7 +86,16 @@ class CommentListApiView(generics.ListCreateAPIView):
 
 class CommentApiView(generics.RetrieveUpdateDestroyAPIView):
     """
+    API to get, update or delete concrete comment of post
+    GET: /posts/<post_id>/comments/<comment_id>/ - return information about
+    comment
 
+    PUT, PATCH: /posts/<post_id>/comments/<comment_id>/ - update comment
+    Body params
+            "content" -> string
+            "author_name" -> string
+
+    DELETE: /posts/<post_id>/comments/<comment_id>/ - delete comment
     """
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
